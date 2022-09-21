@@ -11,6 +11,8 @@ Use git to clone this project and open in Unity.
 - TextMesh Pro
 - Vector Graphics Preview Package
 
+Codes except the dependencies mentioned above are created by Yukun Dai
+
 This repository should includes all necessary packages for running the demo, if you have problem or errors, try to:
 - install TextMesh Pro
 - install Vector Graphics from Unity Package manager, notice you need to turn on preview to see the package.
