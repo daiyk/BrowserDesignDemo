@@ -1,12 +1,8 @@
 ﻿using System;
 using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using BrowserDesign.users;
-using System.Net.Http;
 
 namespace BrowserDesign.UI
 {
@@ -114,7 +110,8 @@ namespace BrowserDesign.UI
 
             CheckInternetConnection();
             // start searching internet
-            InvokeRepeating("CheckInternetConnection", 1.0f, 3.0f);
+            InvokeRepeating("CheckInternet", 0.0f, 3.0f);
+            InvokeRepeating("CheckInternetConnection", 0.5f, 2.0f);
         }
         public void ClosePanel()
         {
@@ -158,7 +155,7 @@ namespace BrowserDesign.UI
         }
 
         /// <summary>
-        /// OnClick function for esri online portal login UI button. This checks if the service is valid
+        /// OnClick function for online portal login UI button. This checks if the service is valid
         /// </summary>
         public async void BTN_SaveESRI()
         {
@@ -177,7 +174,7 @@ namespace BrowserDesign.UI
             //records esri credentials
             if (url.text == "")
             {
-                EsriManager.portal_Domain = $"www.arcgis.com";
+                RemoteServerManager.portal_Domain = $"www.arcgis.com";
             }
             else
             {
@@ -195,47 +192,34 @@ namespace BrowserDesign.UI
                 {
                     url.text = url.text.Remove(url.text.Length - 1);
                 }
-                EsriManager.portal_Domain = url.text;
+                RemoteServerManager.portal_Domain = url.text;
             }
-            EsriManager.IsOauth2Login = oauth2.isOn;
-            EsriManager.portal_userName = userName.text;
-            EsriManager.portal_passWord = passWord.text;
+            RemoteServerManager.IsOauth2Login = oauth2.isOn;
+            RemoteServerManager.portal_userName = userName.text;
+            RemoteServerManager.portal_passWord = passWord.text;
 
             //login use the provided credentials
-            var logResult = await EsriManager.AttemptLogin();
+            var logResult = await RemoteServerManager.AttemptLogin();
             if (logResult.Item1)
             {
                 CancelInvoke("CheckInternetConnection");
                 if (logResult.Item2 == "NonOauth2" || logResult.Item2 == "Oauth2Refresh")
                 {
-                    EsriManager.portal_Registered = true;
+                    RemoteServerManager.portal_Registered = true;
                     messageBar.GetComponent<TextMeshProUGUI>().text = LanguageManager.Translate("Authentication success! please wait for the app to refresh...");
-                    /*if (rememberMe.isOn)
-                    {
-                        UserManager.LoadEsriPortalCredential();
-                    }
-                    else
-                    {
-                        UserManager.ClearPortalCredential();
-                    }
-                    UserManager.SaveUserCredential();*/
+                   
                     portalLoginEvent?.Invoke(url.text, rememberMe.isOn);
                 }
-                //UI.ClosePanel(PanelsApp.PanelsNames.EsriAddPanel);
-                /*** Example Script for new file browser save function, uncomment following to use ***/
-                if (logResult.Item2 == "Oauth2Expired")
-                {
-                    messageBar.GetComponent<TextMeshProUGUI>().text = LanguageManager.Translate("Authentication expired! please close and reopen to login again...");
-                    UserManager.profile.SavedUsers[0].refreshToken = null;
-                    loginProcess = false;
-                }
+           
+                /*** Process other situation of login to portal ***/
+                
                 
             }
             else
             {
 
                 Debug.LogError($"Portal: {userName.text} try to login but failed: {logResult.Item2}.");
-                EsriManager.portal_Registered = false;
+                RemoteServerManager.portal_Registered = false;
                 loginProcess = false;
                 messageBar.SetActive(true);
                 messageBar.GetComponent<TextMeshProUGUI>().text = logResult.Item2;
@@ -255,11 +239,11 @@ namespace BrowserDesign.UI
             {
                 internetIcon.color = Color.green;
                 // enable fields
-                //userName.interactable = true;
-                //passWord.interactable = true;
-                //url.interactable = true;
+                userName.interactable = true;
+                passWord.interactable = true;
+                url.interactable = true;
                 hasInternet = true;
-                titleField.text = LanguageManager.Translate("Esri Portal Sign in");
+                titleField.text = LanguageManager.Translate("Remote Portal Sign in");
                 titleField.color = Color.white;
 
             }
@@ -267,9 +251,9 @@ namespace BrowserDesign.UI
             {
                 internetIcon.color = Color.red;
                 // show the message that we need the connection
-                //userName.interactable = false;
-                //passWord.interactable = false;
-                //url.interactable = false;
+                userName.interactable = false;
+                passWord.interactable = false;
+                url.interactable = false;
                 hasInternet = false;
                 titleField.text = LanguageManager.Translate("Internet Connection Failed");
                 titleField.color = Color.red;

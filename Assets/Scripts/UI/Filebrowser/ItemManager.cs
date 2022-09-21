@@ -1,12 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.IO;
 using UnityEngine;
 using Battlehub.UIControls;
-using Utility;
+using BrowserDesign.Utility;
 #if UNITY_WSA && ENABLE_WINMD_SUPPORT
     using Windows.Storage;
 #endif
@@ -273,13 +272,12 @@ namespace BrowserDesign.UI
         /// <returns></returns>
         public async Task<Portal> GetPortalItems()
         {
-            //Get myContent portal items
-            //UserContent uc = await Managers.esriUtils.GetUserContent(EsriManager.portal_userName, await EsriManager.GetToken());
+            //retrieve items from the online portal
             //create portal root
             //current portal path
-            string base_uri = @"https://" + EsriManager.portal_Domain + @"/sharing/rest/content/users";
-            string portal_url = base_uri + $"/{EsriManager.portal_userName}";
-            Portal currentPortal = new Portal(EsriManager.portal_userName, portal_url);
+            string base_uri = @"https://" + RemoteServerManager.portal_Domain + @"/sharing/rest/content/users";
+            string portal_url = base_uri + $"/{RemoteServerManager.portal_userName}";
+            Portal currentPortal = new Portal(RemoteServerManager.portal_userName, portal_url);
 
             AddItem(currentPortal);
             return currentPortal;
@@ -287,7 +285,7 @@ namespace BrowserDesign.UI
 
         private async Task<Server> GetServiceDirectoryItems()
         {
-            string serviceDirectoryURL = "https://" + EsriManager.serviceDirectory_URL;
+            string serviceDirectoryURL = "https://" + RemoteServerManager.serviceDirectory_URL;
             var sdUri = new Uri(serviceDirectoryURL);
             //build service directorty root 
             var sdRoot = new PortalDirectory(sdUri.Host, serviceDirectoryURL, false);

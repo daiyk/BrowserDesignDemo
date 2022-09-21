@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using BrowserDesign.UI;
 /// <summary>
 /// code for testing the filebrowser and its extension itemloader
@@ -11,7 +9,7 @@ public class SceneController : MonoBehaviour
     enum Choice
     {
         BaseFileBrowser,
-        FileLoader
+        ItemLoader
     }
     [SerializeField]
     private Choice choice;
@@ -36,9 +34,10 @@ public class SceneController : MonoBehaviour
             fileBrowserController.Refresh();
             fileBrowserController.treeView.Items = fileBrowserController.itemManager.ViewItems;
         }
-        else if(choice == Choice.FileLoader)
+        else if(choice == Choice.ItemLoader)
         {
             var browserControllerObj = Instantiate(itemLoader, gameObject.transform.parent.transform);
+            browserControllerObj.transform.localPosition = new Vector3(-130.0f, 0.0f);
         }
     }
 

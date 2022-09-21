@@ -1,19 +1,9 @@
 ﻿using System.Collections.Generic;
 
-namespace BrowserDesign.Extension
+namespace BrowserDesign.API
 {
-    public static class EsriExtensionMethods
+    public static class RemoteResourcesExtensions
     {
-        public static int GetIDlayerFromLayerName(this FeatureService source, string layername)
-        {
-            foreach (var layer in source.layers)
-            {
-                if (layer.name == layername)
-                    return layer.id;
-            }
-
-            return -1;
-        }
 
         /// <summary>
         /// Checks if the FeatureLayer is present
@@ -30,7 +20,11 @@ namespace BrowserDesign.Extension
             }
             return false;
         }
-
+        /// <summary>
+        /// Remove a feature layer from the given list by searching the given name
+        /// </summary>
+        /// <param name="source"></param>
+        /// <param name="layername"></param>
         public static void RemoveFeatureLayerByName(this List<FeatureLayer> source, string layername)
         {
             FeatureLayer fl2remove = new FeatureLayer();
@@ -50,7 +44,11 @@ namespace BrowserDesign.Extension
             }
 
         }
-
+        /// <summary>
+        /// Remove a feature layer from the given list by searching the given URL
+        /// </summary>
+        /// <param name="source"></param>
+        /// <param name="layerUrl"></param>
         public static void RemoveFeatureLayerByUrl(this List<FeatureLayer> source, string layerUrl)
         {
             FeatureLayer fl2remove = new FeatureLayer();

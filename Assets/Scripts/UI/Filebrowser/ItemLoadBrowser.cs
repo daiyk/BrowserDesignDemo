@@ -1,14 +1,13 @@
 ﻿using Battlehub.UIControls;
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
-using BrowserDesign.Extension;
-using Utility;
-using BrowserDesign.users;
-using System.Linq;
+using BrowserDesign.API;
+using BrowserDesign.Utility;
+using BrowserDesign.Users;
 
 namespace BrowserDesign.UI
 {
@@ -259,8 +258,8 @@ namespace BrowserDesign.UI
 
             int selectedIndex = fileBrowserController.treeView.SelectedIndex;
 
-            fileBrowserController.ActivePortal(EsriManager.portal_Registered ? true : false);
-            fileBrowserController.ActiveServiceDirectory(EsriManager.serviceDirectory_Registered ? true : false);
+            fileBrowserController.ActivePortal(RemoteServerManager.portal_Registered ? true : false);
+            fileBrowserController.ActiveServiceDirectory(RemoteServerManager.serviceDirectory_Registered ? true : false);
             var myFavorite = new RootItem("My Favorite");
             myFavorite.Loaded = true;
             var myFavoriteVI = new ViewItem(myFavorite.Name, myFavorite);
@@ -393,8 +392,8 @@ namespace BrowserDesign.UI
                     it.LocalPath = null;
                     break;
                 case FeatureLayerItem it:
-                    EsriManager.layers2load.RemoveFeatureLayerByUrl(it.URL);
-                    EsriManager.layersLoaded.RemoveFeatureLayerByUrl(it.URL);
+                    RemoteServerManager.layers2load.RemoveFeatureLayerByUrl(it.URL);
+                    RemoteServerManager.layersLoaded.RemoveFeatureLayerByUrl(it.URL);
                     break;
                 case KMLItem it:
                     /*******remove this data source from low-level data system********/
@@ -461,9 +460,9 @@ namespace BrowserDesign.UI
                         var featureLayer = await Utilities.GetFeatureLayer(it.URL, it.RequireToken);
                         if (featureLayer != null)
                         {
-                            if (!EsriManager.layers2load.ContainsFeatureLayer(it.URL) && !EsriManager.layersLoaded.ContainsFeatureLayer(it.URL))
+                            if (!RemoteServerManager.layers2load.ContainsFeatureLayer(it.URL) && !RemoteServerManager.layersLoaded.ContainsFeatureLayer(it.URL))
                             {
-                                EsriManager.layers2load.Add(featureLayer);
+                                RemoteServerManager.layers2load.Add(featureLayer);
                             }
                         }
                         else
@@ -582,12 +581,11 @@ namespace BrowserDesign.UI
         void LaunchButton(IBaseItem dataItem, string fileName)
         {
             //save profile for saving favorite items
-            UserManager.SaveUserCredential();
-            Debug.Log("Shows the next level menu");
+            Debug.Log("Show the menu of next level");
         }
         void CancelButton()
         {
-            Debug.Log("Shows the upper level menu");
+            Debug.Log("Show the menu of upper level");
         }
         
         void DestroyFileList()

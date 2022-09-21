@@ -1,9 +1,7 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+using BrowserDesign.API;
 using TMPro;
-using System;
-using Utility;
+using BrowserDesign.Utility;
 using UnityEngine.UI;
 
 namespace BrowserDesign.UI
@@ -170,10 +168,10 @@ namespace BrowserDesign.UI
 
                 //add to loaded layers
                 await itemLoadBrowser.LoadViewItem(Item);
-                /*if (!EsriManager.layers2load.ContainsFeatureLayer(featureLayerItem.URL) && !EsriManager.layersLoaded.ContainsFeatureLayer(featureLayerItem.URL))
+                if (!RemoteServerManager.layers2load.ContainsFeatureLayer(featureLayerItem.URL) && !RemoteServerManager.layersLoaded.ContainsFeatureLayer(featureLayerItem.URL))
                 {
-                    EsriManager.layers2load.Add(featureLayer);
-                }*/
+                    RemoteServerManager.layers2load.Add(featureLayer);
+                }
 
                 if (Item.Loaded)
                 {

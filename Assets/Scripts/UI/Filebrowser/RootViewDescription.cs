@@ -1,7 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using BrowserDesign.users;
+﻿using UnityEngine;
 
 namespace BrowserDesign.UI {
     public class RootViewDescription : MonoBehaviour
@@ -29,7 +26,7 @@ namespace BrowserDesign.UI {
             itemLoadBrowser.Controller.treeView.RemoveSelectedItems();
 
             //set now portal registration free so user can add new portal
-            EsriManager.portal_Registered = false;
+            RemoteServerManager.portal_Registered = false;
 
             //remove any loaded item
             itemLoadBrowser.RemoveDataItem(item.DataItem);
@@ -39,8 +36,7 @@ namespace BrowserDesign.UI {
 
             if (forget)
             {
-                UserManager.ClearPortalCredential();
-                UserManager.SaveUserCredential();
+                /*** Clear user data ***/
             }
         }
 
@@ -48,7 +44,7 @@ namespace BrowserDesign.UI {
         {
             itemLoadBrowser.Controller.treeView.RemoveSelectedItems();
 
-            EsriManager.serviceDirectory_Registered = false;
+            RemoteServerManager.serviceDirectory_Registered = false;
 
             //remove any loaded item
             itemLoadBrowser.RemoveDataItem(item.DataItem);
@@ -58,8 +54,7 @@ namespace BrowserDesign.UI {
 
             if (forget)
             {
-                UserManager.ClearServiceDirectoryCredential();
-                UserManager.SaveUserCredential();
+                /*** Clear user data ***/
             }
         }
     }

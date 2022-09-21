@@ -8,9 +8,9 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
-using BrowserDesign.Extension;
+using BrowserDesign.API;
 
-namespace Utility
+namespace BrowserDesign.Utility
 {
     /// <summary>
     /// Utilities functions/methods for retrieving remote resources
@@ -206,7 +206,7 @@ namespace Utility
             //add token if possible
             if (requireToken)
             {
-                bodyContent.Add("token", await EsriManager.GetToken());
+                bodyContent.Add("token", await RemoteServerManager.GetToken());
             }
             var response = await PostRequest(layerURL, bodyContent);
             if (response == null)
@@ -252,7 +252,7 @@ namespace Utility
             //add token if possible
             if (requireToken)
             {
-                bodyContent.Add("token", await EsriManager.GetToken());
+                bodyContent.Add("token", await RemoteServerManager.GetToken());
             }
             var response = await PostRequest(uri, bodyContent);
             //network request failed, return null
@@ -300,7 +300,7 @@ namespace Utility
             //add token if possible
             if (requireToken)
             {
-                bodyContent.Add("token", await EsriManager.GetToken());
+                bodyContent.Add("token", await RemoteServerManager.GetToken());
             }
             var response = await PostRequest(uri, bodyContent);
             //network request failed, return null
@@ -345,7 +345,7 @@ namespace Utility
             //add token if possible
             if (requireToken && token != null)
             {
-                bodyContent.Add("token", await EsriManager.GetToken());
+                bodyContent.Add("token", await RemoteServerManager.GetToken());
             }
             var response = await PostRequest(uri, bodyContent);
             //if the request failed for some reason.

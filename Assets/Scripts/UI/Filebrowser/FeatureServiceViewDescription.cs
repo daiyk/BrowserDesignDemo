@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Utility;
+﻿using BrowserDesign.Utility;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
-using BrowserDesign.Extension;
+using BrowserDesign.API;
 
 namespace BrowserDesign.UI
 {
@@ -117,7 +112,7 @@ namespace BrowserDesign.UI
                 if(featureServiceItem.ThumbNailUrl != null)
                 {
                     thumbNail.SetActive(true);
-                    var imageTexture = await Utilities.GetImage(featureServiceItem.ThumbNailUrl, await EsriManager.GetToken(),featureServiceItem.RequireToken);
+                    var imageTexture = await Utilities.GetImage(featureServiceItem.ThumbNailUrl, await RemoteServerManager.GetToken(),featureServiceItem.RequireToken);
                     if(imageTexture != null)
                     {
                         thumbNail.GetComponent<Image>().sprite = Sprite.Create(imageTexture, new Rect(0f, 0f, imageTexture.width, imageTexture.height), new Vector2(0.5f, 0.5f));
@@ -214,7 +209,7 @@ namespace BrowserDesign.UI
             {
                 thumbNail.SetActive(true);
                 //build uri
-                var imageTexture = await Utilities.GetImage(featureServiceItem.ThumbNailUrl, await EsriManager.GetToken(), featureServiceItem.RequireToken);
+                var imageTexture = await Utilities.GetImage(featureServiceItem.ThumbNailUrl, await RemoteServerManager.GetToken(), featureServiceItem.RequireToken);
                 if (imageTexture != null)
                 {
                     thumbNail.GetComponent<Image>().sprite = Sprite.Create(imageTexture, new Rect(0f, 0f, imageTexture.width, imageTexture.height), new Vector2(0.5f, 0.5f));

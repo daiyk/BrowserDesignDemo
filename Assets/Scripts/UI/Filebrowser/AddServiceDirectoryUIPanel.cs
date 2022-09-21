@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
-using Utility;
+using BrowserDesign.Utility;
 public class AddServiceDirectoryUIPanel : MonoBehaviour
 {
     [SerializeField]
@@ -25,9 +25,9 @@ public class AddServiceDirectoryUIPanel : MonoBehaviour
     public void InitializePanel()
     {
         //check if there are already service directory registered
-        if(EsriManager.serviceDirectory_URL != null)
+        if(RemoteServerManager.serviceDirectory_URL != null)
         {
-            m_serviceURL.text = EsriManager.serviceDirectory_URL;
+            m_serviceURL.text = RemoteServerManager.serviceDirectory_URL;
         }
     }
 
@@ -40,7 +40,7 @@ public class AddServiceDirectoryUIPanel : MonoBehaviour
         }
         else
         {
-            //add service directory url to the esrimanager and refresh the filebrowser
+            //add service directory url to the RemoteServiceManager and refresh the filebrowser
             var serviceDirectoryURL = m_serviceURL.text;
             serviceDirectoryURL = serviceDirectoryURL.Replace(" ", string.Empty);
             if (serviceDirectoryURL.StartsWith("https://"))

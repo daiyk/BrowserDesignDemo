@@ -1,13 +1,8 @@
-﻿using Newtonsoft.Json;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-namespace BrowserDesign.Extension
+﻿namespace BrowserDesign.API
 {
     public class FeatureLayer
     {
-        // v-labs
+        // credential information
         public string layerUrl { get; set; }
         public bool requireToken { get; set; } = false;
         public bool isPortalItem { get; set; } = false; //check whether it belongs to the portal item

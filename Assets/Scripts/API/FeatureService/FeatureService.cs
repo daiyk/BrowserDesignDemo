@@ -1,12 +1,9 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-namespace BrowserDesign.Extension
+﻿using System.Collections.Generic;
+namespace BrowserDesign.API
 {
     public class FeatureService
     {
-        // v-labs
+        // credential information
         public string serviceName { get; set; }
         public string url { get; set; }
         public string username { get; set; }

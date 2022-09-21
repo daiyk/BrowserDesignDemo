@@ -29,7 +29,7 @@ public class AddArcGISServiceUIPanel : MonoBehaviour
     {
         m_portalSummary.text = "";
         m_serviceSummary.text = "";
-        if (EsriManager.portal_Registered)
+        if (RemoteServerManager.portal_Registered)
         {
             m_portalButton.interactable = false;
             m_portalSummary.text = LanguageManager.Translate("A portal is already registered, please log out the current portal before new login");
@@ -38,7 +38,7 @@ public class AddArcGISServiceUIPanel : MonoBehaviour
         {
             m_portalButton.interactable = true;
         }
-        if (EsriManager.serviceDirectory_Registered)
+        if (RemoteServerManager.serviceDirectory_Registered)
         {
             m_serviceDirectory.interactable = false;
             m_serviceSummary.text = LanguageManager.Translate("A service directory is already registered, please log out the current service directory before new login");
@@ -73,8 +73,8 @@ public class AddArcGISServiceUIPanel : MonoBehaviour
     public async void addServiceDirectoryEventListener(string serviceDirectoryURL, bool isRemember)
     {
         //register service directory
-        EsriManager.serviceDirectory_URL = serviceDirectoryURL; // record the service directory url.
-        EsriManager.serviceDirectory_Registered = true; // tell esrimanager that we have one sd registered and no more service directory can be registered.
+        RemoteServerManager.serviceDirectory_URL = serviceDirectoryURL; // record the service directory url.
+        RemoteServerManager.serviceDirectory_Registered = true; // tell esrimanager that we have one sd registered and no more service directory can be registered.
 
         //refresh the filebrwoser and wait for its refresh
         controller.Refresh();

@@ -1,10 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-namespace BrowserDesign.Extension
+﻿using System.Collections.Generic;
+namespace BrowserDesign.API
 {
     public class MapService
     {
-        // v-labs
+        // credential information
         public string url { get; set; }
         public string username { get; set; }
         public string password { get; set; }
