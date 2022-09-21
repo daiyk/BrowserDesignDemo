@@ -10,6 +10,7 @@ Use git to clone this project and open in Unity.
 - BattleHub VirtualizingTreeView Unity plugin
 - TextMesh Pro
 - Vector Graphics Preview Package
+
 This repository should includes all necessary packages for running the demo, if you have problem or errors, try to:
 - install TextMesh Pro
 - install Vector Graphics from Unity Package manager, notice you need to turn on preview to see the package.
@@ -32,7 +33,7 @@ Click `BaseCanvas`->`Controller`, in the inspector, under `SceneController` scri
 - `Item Loader`: a example extension to the basic file browser, which can load/unload data from local storage, public server and private server.
 
 ### Use Base File Browser
-The file browser will scan and show files in `Application.persistentDataPath`, limited file types(`.kml`,`.kmz`,`.job`,`.dxf` and `.obj`) are supported.
+The file browser will scan and show files in `Application.persistentDataPath`, limited file types (`.kml`,`.kmz`,`.job`,`.dxf` and `.obj`) are supported.
 
 By selecting any available item in the list and optionally typing string in the input field, clicking "Confirm" button will log the item's name and your input string in the console. 
 Clicking "Cancel" button will log the cancel button pressed event in the console.
@@ -49,6 +50,7 @@ Dai Yukun
 
 ## License
 All rights are reserved
+
 See [License](LICENSE.md).
 
 
