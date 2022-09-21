@@ -12,6 +12,9 @@ using BrowserDesign.Extension;
 
 namespace Utility
 {
+    /// <summary>
+    /// Utilities functions/methods for retrieving remote resources
+    /// </summary>
     class Utilities : MonoBehaviour
     {
         /// <summary>
@@ -286,7 +289,54 @@ namespace Utility
                 return null;
             }
         }
+        /// <summary>
+        /// Gets a map service from url
+        /// </summary>
+        public async static Task<MapService> GetMapService(string uri, bool requireToken = false)
+        {
+            Dictionary<string, string> bodyContent = new Dictionary<string, string>();
+            //add token, and other stuff
+            bodyContent.Add("f", "json");
+            //add token if possible
+            if (requireToken)
+            {
+                bodyContent.Add("token", await EsriManager.GetToken());
+            }
+            var response = await PostRequest(uri, bodyContent);
+            //network request failed, return null
+            if (response == null)
+            {
+                return null;
+            }
+            if (response.Content.Headers.Contains("error"))
+            {
+                var messages = response.Content.Headers.GetValues("error");
+                StringBuilder totalMess = new StringBuilder();
+                foreach (var mess in messages)
+                {
+                    totalMess.Append(mess);
+                }
+                Debug.LogError(totalMess.ToString());
+                return null;
+            }
+            StreamReader reader = new StreamReader(await response.Content.ReadAsStreamAsync());
+            string resp2string = reader.ReadToEnd();
 
+            try
+            {
+                MapService ms = JsonConvert.DeserializeObject<MapService>(resp2string);
+                ms.url = uri;
+                ms.requireToken = requireToken;
+
+                ms.authority = ms.capabilities.Split(',').ToList();
+                return ms;
+            }
+            catch (Exception ex)
+            {
+                Debug.LogError($"Map Service: {uri} can't be loaded. {ex.Message}");
+                return null;
+            }
+        }
         public async static Task<Texture2D> GetImage(string uri, string token = null, bool requireToken = false)
         {
             Dictionary<string, string> bodyContent = new Dictionary<string, string>();

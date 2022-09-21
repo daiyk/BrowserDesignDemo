@@ -10,7 +10,7 @@ namespace BrowserDesign.UI
     {
         private List<IPortalItem> layers;
 
-        //info about the mapservice
+        //info about the mapservice, uniquely to service item
         public string Description { get; set; }
         public string Snippt { get; set; }
         public MapServiceItem(string name, string url)

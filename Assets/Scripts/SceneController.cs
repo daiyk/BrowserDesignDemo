@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 using BrowserDesign.UI;
-
+/// <summary>
+/// code for testing the filebrowser and its extension itemloader
+/// </summary>
 public class SceneController : MonoBehaviour
 {
     // Start is called before the first frame update
@@ -24,8 +26,8 @@ public class SceneController : MonoBehaviour
         {
             var browserControllerObj = Instantiate(browserController, gameObject.transform.parent.transform);
             var fileBrowserController = browserControllerObj.GetComponent<FileBrowserController>();
-            fileBrowserController.ActiveServiceDirectory(EsriManager.serviceDirectory_Registered ? true : false);
-            fileBrowserController.InitializePanel();
+            fileBrowserController.AddItemSelectedEventListener(PressedConfirmButton);
+            fileBrowserController.AddItemCancelEventListener(PressedCancelButton);
             ////add restrict condition
             //if (!fileBrowserController.itemManager.allowedViewItemTypes.Contains(typeof(BrowserDesign.UI.Directory)))
             //{
@@ -38,5 +40,17 @@ public class SceneController : MonoBehaviour
         {
             var browserControllerObj = Instantiate(itemLoader, gameObject.transform.parent.transform);
         }
+    }
+
+    //listener for press confirm button
+    void PressedConfirmButton(IBaseItem item, string inputFieldString)
+    {
+        Debug.Log($"Attention: You have pressed the confirm button.\n FileName: {item.Name} \n Input Field: {inputFieldString}");
+
+    }
+    //listener for press cancel button
+    void PressedCancelButton()
+    {
+        Debug.Log("Attention: You have pressed the cancel button.");
     }
 }

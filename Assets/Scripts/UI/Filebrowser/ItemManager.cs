@@ -13,13 +13,16 @@ using Utility;
 
 namespace BrowserDesign.UI
 {
+    /// <summary>
+    /// Model: database for the file browser
+    /// </summary>
     public class ItemManager : MonoBehaviour
     {
         //storage for all items
         HashSet<IBaseItem> dataItems = new HashSet<IBaseItem>();
         //UI items that are listed in the filebrowser UI
         public List<ViewItem> ViewItems { get; set; }
-        //data Items tree's root that are managed by this ItemManager
+        //treeView's root that are managed by this ItemManager
         List<IBaseItem> rootItems = new List<IBaseItem>();
 
 
@@ -309,7 +312,7 @@ namespace BrowserDesign.UI
                     //create new item and add to the child of current portal directory
                     var childPd = new PortalDirectory(folder, pd.URL + "/" + folder,false);
                     childPd = await GetSubServiceDirectoryTree(childPd);
-                    pd.AddItem(childPd);
+                    pd.AddLayer(childPd);
                     AddItem(childPd);
                 }
                 foreach (var service in sd.services)
@@ -338,7 +341,7 @@ namespace BrowserDesign.UI
                         }
 
                         childService = (IPortalItem)AddOrExistItem(childService);
-                        pd.AddItem(childService);
+                        pd.AddLayer(childService);
                     }
                 }
             }

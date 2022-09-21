@@ -936,8 +936,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2927799159132358774}
   m_HandleRect: {fileID: 8449885903275539625}
   m_Direction: 2
-  m_Value: 0.9999998
-  m_Size: 0.49333328
+  m_Value: 1
+  m_Size: 0.49333334
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -1214,7 +1214,6 @@ GameObject:
   - component: {fileID: 5510115574861664739}
   - component: {fileID: 1661866525548654403}
   - component: {fileID: 2951275119527702104}
-  - component: {fileID: 2303865572899878489}
   m_Layer: 5
   m_Name: WebMapViewDescription
   m_TagString: Untagged
@@ -1341,27 +1340,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_HorizontalFit: 0
   m_VerticalFit: 2
---- !u!114 &2303865572899878489
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5510115574861664738}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7059fda51da704649bdd518cd05a9bdc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  PanelCurrentLanguage: 0
-  PanelTargetLanguage: 0
-  avoidTranslation: 0
-  autoTranslate: 0
-  changesAreSaved: 1
-  GameObjectsToTranslate:
-  - {fileID: 6102704714917294224}
-  - {fileID: 1237030579846707347}
-  - {fileID: 8064950552357888235}
 --- !u!1 &5633075288391687727
 GameObject:
   m_ObjectHideFlags: 0

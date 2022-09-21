@@ -18,6 +18,7 @@ namespace BrowserDesign.UI
             this.path = path;
             this.name = name;
         }
+        //file item has a path that uniquely identify itself
         public string Path 
         { 
             get { return path; } 

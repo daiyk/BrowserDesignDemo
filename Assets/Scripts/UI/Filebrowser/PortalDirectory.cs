@@ -23,7 +23,7 @@ namespace BrowserDesign.UI
             layers = new List<IPortalItem>();
             base.requireToken = requireToken;
         }
-        public void AddItem(IPortalItem item)
+        public void AddLayer(IPortalItem item)
         {
             if (!layers.Contains(item))
             {

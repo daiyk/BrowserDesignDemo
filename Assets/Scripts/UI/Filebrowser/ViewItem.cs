@@ -6,13 +6,18 @@ using System.Threading.Tasks;
 using UnityEngine;
 namespace BrowserDesign.UI
 {
+    /// <summary>
+    /// ViewItem is used for View Model: UI in TreeView package
+    /// </summary>
     public class ViewItem:IBaseItem
     {
         IBaseItem dataItem;
+
         //compulsory field for treeView
         public ViewItem Parent;
         public List<ViewItem> Children;
-        //override the base class name property
+        
+        //override the base class name property, since we need to modify it
         public new string Name
         {
             get { return base.name; }

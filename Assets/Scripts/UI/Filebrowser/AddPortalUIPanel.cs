@@ -10,6 +10,9 @@ using System.Net.Http;
 
 namespace BrowserDesign.UI
 {
+    /// <summary>
+    /// UI Script for managing arcgis portal login
+    /// </summary>
     public class AddPortalUIPanel : MonoBehaviour
     {
         [SerializeField]
@@ -107,48 +110,7 @@ namespace BrowserDesign.UI
             //initialize deeplink listener
             Application.deepLinkActivated += DeepLinkActivated;
 
-            //insert user profile from file
-        /*    if (UserManager.profile.SavedUsers[0].EsriName != "")
-            {
-
-                //load credential to the esrimanager
-                EsriManager.LoadUserProfile();
-
-                userName.text = UserManager.profile.SavedUsers[0].EsriName;
-                if (!UserManager.profile.SavedUsers[0].isOAuth2)
-                {
-                    if (UserManager.profile.SavedUsers[0].EncryptionVec != "")
-                    {
-                        EncryptionAES encrypManager = new EncryptionAES(Convert.FromBase64String(UserManager.profile.SavedUsers[0].EncryptionVec));
-
-                        //decrypt the credential and fillout the passwd part
-                        var decryptString = encrypManager.DecryptString(UserManager.profile.SavedUsers[0].Encryption);
-                        passWord.text = decryptString;
-                    }
-                }
-                if (UserManager.profile.SavedUsers[0].isOAuth2)
-                {
-                    oauth2.isOn = true;
-                }
-
-                //fill out domain url
-                url.text = UserManager.profile.SavedUsers[0].EsriDomain;
-
-                //turn on the login button interactable
-                loginBTN.interactable = true;
-
-                //if success then toggle should be true
-                rememberMe.isOn = true;
-            }*/
-
-            //Check the support of OAuth2 credential login
-            /*if (EsriManager.oauth2_clientId == null)
-            {
-                oauth2.isOn = false;
-                oauth2.interactable = false;
-            }
-            //turn on the login button interactable
-            loginBTN.interactable = true;*/
+            /***Load user profile from the local/remote****/
 
             CheckInternetConnection();
             // start searching internet
@@ -283,7 +245,9 @@ namespace BrowserDesign.UI
             }
         }
 
-
+        /// <summary>
+        /// check internet and enable the field only if internet is connected
+        /// </summary>
         private void CheckInternetConnection()
         {
             // check internet button

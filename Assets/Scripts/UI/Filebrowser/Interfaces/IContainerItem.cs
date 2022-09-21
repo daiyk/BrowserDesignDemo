@@ -9,6 +9,7 @@ namespace BrowserDesign.UI
     interface IContainerItem<T>: IContainerLabelItem
     {
         List<T> GetLayers();
+        void AddLayer(T layer);
         void ClearLayers();
     }
 

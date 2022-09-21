@@ -7,14 +7,15 @@ using System.Threading.Tasks;
 
 namespace BrowserDesign.UI
 {
+    /// <summary>
+    /// The controller for filebrowser which controls the whole system's data flow.
+    /// </summary>
     [RequireComponent(typeof(ItemManager))]
     public class FileBrowserController : MonoBehaviour
     {
+        //view model: thrid-party plug-in
         [SerializeField]
         public VirtualizingTreeView treeView;
-
-        [SerializeField]
-        private TMP_InputField nameInput;
 
         [Tooltip("Ui controller that accompany this file browser")]
         [SerializeField]
@@ -47,29 +48,30 @@ namespace BrowserDesign.UI
         [SerializeField]
         private Sprite featureSericeIcon;
         #endregion
-
+        //switch on/off including portal
         public void ActivePortal(bool active)
         {
             itemManager.AddPortal = active;
         }
+        //switch on/off including service directory
         public void ActiveServiceDirectory(bool active)
         {
             itemManager.AddServiceDirectory = active;
         }
-        //toggle portal items loading
+        //switch on/off portal's user items loading
         public bool SetLoadPortalUserContent 
         {
             get { return itemManager.SetLoadUserContent; }
             set { itemManager.SetLoadUserContent = value; } 
         }
-        //loading user content when loading portal
+        //switch on/off portal's public items loading
         public bool SetLoadPortalOrganizationContent
         {
             get { return itemManager.SetLoadOrganizationContent; }
             set { itemManager.SetLoadOrganizationContent = value; }
         }
   
-        //UI control setting for the basic panel
+        //switch on/off user input field
         public bool ToggleInputField
         {
             get { return UIControl.inputFieldObject.activeSelf; }
@@ -177,7 +179,7 @@ namespace BrowserDesign.UI
                     }
                 }
                 itemManager.ViewItems = viewItemRootTree;
-
+                //initialize treeView and show in UI
                 treeView.Items = itemManager.ViewItems;
             }
         }

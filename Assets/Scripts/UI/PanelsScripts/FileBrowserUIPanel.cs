@@ -1,8 +1,6 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using BrowserDesign.UI;
 using TMPro;
-using BrowserDesign.UI;
+using UnityEngine;
 
 public class FileBrowserUIPanel : MonoBehaviour
 {
@@ -36,7 +34,7 @@ public class FileBrowserUIPanel : MonoBehaviour
     /// </summary>
     public event ItemSelectCancelEventHandler cancelButtonPressed;
 
-    public delegate void ItemSelectedEventHandler(IBaseItem dataItem, string fileName);
+    public delegate void ItemSelectedEventHandler(IBaseItem dataItem, string InputString);
     public delegate void ItemSelectCancelEventHandler();
 
     public ViewItem CurrentSelection

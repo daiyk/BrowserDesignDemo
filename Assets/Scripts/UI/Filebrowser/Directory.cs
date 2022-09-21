@@ -8,6 +8,7 @@ namespace BrowserDesign.UI
 {
     public class Directory: IFileItem,IContainerItem<IFileItem>
     {
+        //files it contains
         List<IFileItem> items;
         public override bool Loaded { get; set; } = true; //by default directory is loaded = true
         public Directory(string name, string path, List<IFileItem> childItems): base(name, path)
@@ -22,6 +23,8 @@ namespace BrowserDesign.UI
         {
             items = new List<IFileItem>();
         }
+
+        //Items should have these properties
         public void AddLayer(IFileItem item)
         {
             if (!items.Contains(item))

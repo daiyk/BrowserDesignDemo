@@ -4,6 +4,7 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 using BrowserDesign.Extension;
+using Utility;
 
 namespace BrowserDesign.UI
 {
@@ -170,6 +171,37 @@ namespace BrowserDesign.UI
             var mapServiceItem = (MapServiceItem)Item.DataItem;
 
             //TODO: update viewItem UI (Maybe invoke a event consumer in specific ViewItem observer?)
+            //get map service
+            MapService ms = await Utilities.GetMapService(mapServiceItem.URL, mapServiceItem.RequireToken);
+            if (ms == null)
+            {
+                return;
+            }
+
+            //check map service capability
+            if (!ms.authority.Contains("Query"))
+            {
+                Debug.LogError($"Portal: Try to load {ms.mapName} but failed, because it doesn't support query operation");
+
+                snippetBar.GetComponent<TextMeshProUGUI>().text = $"{ms.mapName}" + LanguageManager.Translate(" is unloaded because it doesn't support query operation");
+                snippetBar.GetComponent<TextMeshProUGUI>().color = Color.red;
+                return;
+            }
+
+            descriptionBar.SetActive(true);
+            mapServiceItem.Description = ms.description;
+
+            description.text = mapServiceItem.Description;
+
+            //load feature layers, maybe need to set parent
+            for (int i = 0; i < ms.layers.Length; i++)
+            {
+                var layer = new FeatureLayerItem(ms.layers[i].name, mapServiceItem.URL + "/" + ms.layers[i].id, mapServiceItem.RequireToken);
+
+                layer = (FeatureLayerItem)itemLoadBrowser.Controller.itemManager.AddOrExistItem(layer);
+                mapServiceItem.AddLayer(layer);
+
+            }
 
             Item.Children.Clear();
             if (mapServiceItem.GetLayers().Count > 0)

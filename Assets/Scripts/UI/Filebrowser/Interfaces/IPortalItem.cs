@@ -12,6 +12,7 @@ namespace BrowserDesign.UI
         protected bool requireToken;
         protected string thumbNailUrl; //url to this item's thumbnail picture in the portal
 
+        //This property is unique for private portal item, since it includes a image link
         public string ThumbNailUrl
         {
             get { return thumbNailUrl; }
@@ -22,6 +23,8 @@ namespace BrowserDesign.UI
         { 
             get { return requireToken; } 
         }
+
+        //portal item should have a webURL that uniquely defines itself
         public string URL
         {
             get { return url; }

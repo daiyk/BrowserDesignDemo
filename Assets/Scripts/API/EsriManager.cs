@@ -1,12 +1,13 @@
-﻿using System.Collections;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
 using BrowserDesign.Extension;
 using System.Threading.Tasks;
 using System.Linq;
 using BrowserDesign.UI;
-using BrowserDesign.users;
+/// <summary>
+/// EsriManager, this manages all relevant parameters for loading/unloading remote resources 
+/// </summary>
 public class EsriManager : MonoBehaviour
 {
     /// <summary>
