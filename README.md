@@ -1,5 +1,5 @@
 # A demo to show the design of file browser
-This is a demo project to show a design of file browser, which it can load data from local storage and remote server. The file browser also has good extensibility that external features and modules can be easily added on top of the kernel.
+This is a demo project to show a design of file browser, which it can load data from local storage and remote server. The file browser also has good extensibility that external features and modules can be easily added on top of the kernel function.
 
 ## Get Started
 Use git to clone this project and open in Unity. 
