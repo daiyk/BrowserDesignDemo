@@ -1,4 +1,4 @@
-# A demo to show the design of file browser
+# The design of a file browser
 This is a demo project to show a design of file browser, which it can load data from local storage and remote server. The file browser also has good extensibility that external features and modules can be easily added on top of the kernel function.
 
 ## Get Started
